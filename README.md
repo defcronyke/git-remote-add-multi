@@ -19,12 +19,12 @@ bash <(curl -sL https://tinyurl.com/git-remote-add-multi) [$GIT_REMOTE2]
 #### Optional: Set these environment variables to customize the behaviour (defaults are as below):
 
 ```shell
-GIT_REMOTE_NAME=all
-GIT_REMOTE_EXT=.git
-GIT_REMOTE1=git@gitlab.com:
-GIT_REMOTE2=git@github.com:
-GIT_REPO_OWNER=defcronyke
-GIT_REPO_NAME=git-remote-add-multi
+GIT_REMOTE_NAME="all"
+GIT_REMOTE_EXT=".git"
+GIT_REMOTE1="git@gitlab.com:"
+GIT_REMOTE2="git@github.com:"
+GIT_REPO_OWNER="defcronyke"
+GIT_REPO_NAME="git-remote-add-multi"
 ```
 
 With the current settings, these urls will be added to a new remote called "all"
