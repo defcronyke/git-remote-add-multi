@@ -87,9 +87,9 @@ git_remote_add_multi() {
 		return $?
 	fi
 
-	git remote add ${GIT_REMOTE_NAME} ${GIT_REMOTE1}/${GIT_REPO_OWNER}/${GIT_REPO_NAME}${GIT_REMOTE_EXT}
-	git remote set-url --push --add ${GIT_REMOTE_NAME} ${GIT_REMOTE1}/${GIT_REPO_OWNER}/${GIT_REPO_NAME}${GIT_REMOTE_EXT}
-	git remote set-url --push --add ${GIT_REMOTE_NAME} ${GIT_REMOTE2}/${GIT_REPO_OWNER2}/${GIT_REPO_NAME2}${GIT_REMOTE_EXT2}
+	git remote add ${GIT_REMOTE_NAME} ${GIT_REMOTE1}${GIT_REPO_OWNER}/${GIT_REPO_NAME}${GIT_REMOTE_EXT}
+	git remote set-url --push --add ${GIT_REMOTE_NAME} ${GIT_REMOTE1}${GIT_REPO_OWNER}/${GIT_REPO_NAME}${GIT_REMOTE_EXT}
+	git remote set-url --push --add ${GIT_REMOTE_NAME} ${GIT_REMOTE2}${GIT_REPO_OWNER2}/${GIT_REPO_NAME2}${GIT_REMOTE_EXT2}
 
 	git remote -v
 }
