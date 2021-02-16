@@ -3,9 +3,17 @@
 ```shell
 $ bash <(curl -sL https://tinyurl.com/git-remote-add-multi) -h
 
-Add a new git remote called "all" pointing at both gitlab (primary) and github (secondary).
+Git Remote Add Multi
 
-usage: bash <(curl -sL https://tinyurl.com/git-remote-add-multi) [$GIT_REPO_NAME] [$GIT_REPO_OWNER]
+by Jeremy Carter <jeremy@jeremycarter.ca>
+
+Add a new git remote called "all" pointing at both the current origin remote, and a secondary remote to use as
+a mirror. By default, if your origin remote isn't GitHub, then GitHub is used as the secondary remote, and it is
+assumed to have the same repo owner and repo name as your origin remote. If your origin remote is GitHub, by
+default it will use GitLab as the secondary remote. You can set a different secondary remote by passing a remote
+url as the first command line argument if you want.
+
+usage: bash <(curl -sL https://tinyurl.com/git-remote-add-multi) [$GIT_REMOTE2]
 
 Optional: Set these environment variables to customize the behaviour (defaults are as below):
 
