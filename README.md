@@ -2,7 +2,9 @@
 
 ```shell
 $ bash <(curl -sL https://tinyurl.com/git-remote-add-multi) -h
+```
 
+```
 Git Remote Add Multi
 
 by Jeremy Carter <jeremy@jeremycarter.ca>
