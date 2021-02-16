@@ -12,7 +12,7 @@ git_remote_add_multi_usage() {
 	echo "default it will use GitLab as the secondary remote. You can set a different secondary remote by passing a remote"
 	echo "url as the first command line argument if you want."
 	echo ""
-	echo "usage: bash <(curl -sL https://tinyurl.com/git-remote-add-multi) [\$GIT_REMOTE2]"
+	echo "usage: bash <(curl -sL https://tinyurl.com/git-remote-add-multi) [secondary-git-url]"
 	echo ""
 	echo "Optional: Set these environment variables to customize the behaviour (defaults are as below):"
 	echo ""
