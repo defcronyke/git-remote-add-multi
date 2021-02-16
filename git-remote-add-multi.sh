@@ -2,18 +2,26 @@
 
 git_remote_add_multi_usage() {
 	echo ""
-        echo "Add a new git remote called \"all\" pointing at both gitlab (primary) and github (secondary)."
-        echo ""
-        echo "usage: bash <(curl -sL https://tinyurl.com/git-remote-add-multi) [\$GIT_REPO_NAME] [\$GIT_REPO_OWNER]"
-        echo ""
-        echo "Optional: Set these environment variables to customize the behaviour (defaults are as below):"
-        echo ""
-        echo "GIT_REMOTE_NAME=${GIT_REMOTE_NAME}"
-        echo "GIT_REMOTE_EXT=${GIT_REMOTE_EXT}"
-        echo "GIT_REMOTE1=${GIT_REMOTE1}"
-        echo "GIT_REMOTE2=${GIT_REMOTE2}"
-        echo "GIT_REPO_OWNER=${GIT_REPO_OWNER}"
-        echo "GIT_REPO_NAME=${GIT_REPO_NAME}"
+	echo "Git Remote Add Multi"
+	echo ""
+	echo "by Jeremy Carter <jeremy@jeremycarter.ca>"
+	echo ""
+	echo "Add a new git remote called \"all\" pointing at both the current origin remote, and a secondary remote to use as"
+	echo "a mirror. By default, if your origin remote isn't GitHub, then GitHub is used as the secondary remote, and it is"
+	echo "assumed to have the same repo owner and repo name as your origin remote. If your origin remote is GitHub, by"
+	echo "default it will use GitLab as the secondary remote. You can set a different secondary remote by passing a remote"
+	echo "url as the first command line argument if you want."
+	echo ""
+	echo "usage: bash <(curl -sL https://tinyurl.com/git-remote-add-multi) [\$GIT_REMOTE2]"
+	echo ""
+	echo "Optional: Set these environment variables to customize the behaviour (defaults are as below):"
+	echo ""
+	echo "GIT_REMOTE_NAME=${GIT_REMOTE_NAME}"
+	echo "GIT_REMOTE_EXT=${GIT_REMOTE_EXT}"
+	echo "GIT_REMOTE1=${GIT_REMOTE1}"
+	echo "GIT_REMOTE2=${GIT_REMOTE2}"
+	echo "GIT_REPO_OWNER=${GIT_REPO_OWNER}"
+	echo "GIT_REPO_NAME=${GIT_REPO_NAME}"
 	echo ""
 	echo "With the current settings, these urls will be added to a new remote called \"$GIT_REMOTE_NAME\""
 	echo "if you run this command again with no arguments:"
@@ -33,11 +41,8 @@ git_remote_add_multi_swap() {
 
 	if [ "$1" == "$2" ]; then 
 		echo "$3"
-	elif [ "$1" == "$3" ]; then 
+	else 
 		echo "$2"
-	else
-		echo "error: The first arg wasn't equal to either the second or the third arg. Swapping failed: $1: $2: $3"
-		return 4
 	fi
 }
 
@@ -54,36 +59,42 @@ git_remote_add_multi() {
 	fi
 	set -e
 
+	GIT_DEFAULT_REMOTE2=${GIT_DEFAULT_REMOTE2:-github.com}
+	GIT_ALT_REMOTE2=${GIT_ALT_REMOTE2:-gitlab.com}
 	GIT_REMOTE_NAME=${GIT_REMOTE_NAME:-all}
 	GIT_REMOTE_EXT=${GIT_REMOTE_EXT:-$(git remote get-url origin | sed -E "s/(git@|https:\/\/)(.+)([\/\:])(.+)\/(.+)(\..+)/\6/")}
+	GIT_REMOTE_EXT2=${GIT_REMOTE_EXT2:-$GIT_REMOTE_EXT}
 	GIT_REMOTE1=${GIT_REMOTE1:-$(git remote get-url origin | sed 's@\(^.\+[/:]\).\+/.\+@\1@')}
 	GIT_REMOTE_HOST1=${GIT_REMOTE_HOST1:-$(echo "$GIT_REMOTE1" | sed -E 's/(git@|https:\/\/)(.+)([\/\:])/\2/')}
-	GIT_REMOTE_HOST2=${GIT_REMOTE_HOST2:-github.com}
+	GIT_REMOTE_HOST2=${GIT_REMOTE_HOST2:-$GIT_DEFAULT_REMOTE2}
 
 	set +e
-	GIT_REMOTE_SWAPPED=$(git_remote_add_multi_swap $(echo "$GIT_REMOTE1" | sed -E 's/(git@|https:\/\/)(.+)([\/\:])/\2/') "$GIT_REMOTE_HOST1" "$GIT_REMOTE_HOST2")
+	GIT_REMOTE_SWAPPED=$(git_remote_add_multi_swap $(echo "$GIT_REMOTE1" | sed -E 's/(git@|https:\/\/)(.+)([\/\:])/\2/') "$GIT_DEFAULT_REMOTE2" "$GIT_ALT_REMOTE2")
 	set -e
 
 	GIT_REMOTE2=${GIT_REMOTE2:-$(echo "$GIT_REMOTE1" | sed -E "s/(git@|https:\/\/)(.+)([\/\:])/\1$GIT_REMOTE_SWAPPED\3/")}
 	GIT_REPO_OWNER=${GIT_REPO_OWNER:-$(git remote get-url origin | sed -E 's/(git@|https:\/\/)(.+)([\/\:])(.+)\/(.+)/\4/')}
 	GIT_REPO_NAME=${GIT_REPO_NAME:-$(git remote get-url origin | sed -E "s/(git@|https:\/\/)(.+)([\/\:])(.+)\/(.+)(\..+)/\5/")}
+	GIT_REPO_OWNER2=${GIT_REPO_OWNER2:-$GIT_REPO_OWNER}
+	GIT_REPO_NAME2=${GIT_REPO_NAME2:-$GIT_REPO_NAME}
 
-	if [ $# -gt 2 ] || [ $# -ge 1 ] && [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+	if [ $# -ge 1 ] && [ "$1" != "-h" ] && [ "$1" != "--help" ]; then
+		GIT_REMOTE2_ARG="$1"
+		GIT_REMOTE_EXT2=$(echo "$GIT_REMOTE2_ARG" | sed -E "s/(git@|https:\/\/)(.+)([\/\:])(.+)\/(.+)(\..+)/\6/")
+		GIT_REMOTE_HOST2=$(echo "$GIT_REMOTE2_ARG" | sed -E "s/(git@|https:\/\/)(.+)([\/\:])(.+)\/(.+)(\..+)/\2/")
+		GIT_REMOTE2=$(echo "$GIT_REMOTE2_ARG" | sed 's@\(^.\+[/:]\).\+/.\+@\1@')
+		GIT_REPO_OWNER2=$(echo "$GIT_REMOTE2_ARG" | sed -E 's/(git@|https:\/\/)(.+)([\/\:])(.+)\/(.+)/\4/')
+		GIT_REPO_NAME2=$(echo "$GIT_REMOTE2_ARG" | sed -E "s/(git@|https:\/\/)(.+)([\/\:])(.+)\/(.+)(\..+)/\5/")
+	fi
+
+	if [ $# -ge 1 ] && [ "${@: -1}" == "-h" ] || [ "${@: -1}" == "--help" ]; then
 		git_remote_add_multi_usage
 		return $?
 	fi
 
-	if [ $# -ge 1 ]; then
-		GIT_REPO_NAME=$1
-	fi
-
-	if [ $# -ge 2 ]; then
-		GIT_REPO_OWNER=$2
-	fi
-
 	git remote add ${GIT_REMOTE_NAME} ${GIT_REMOTE1}/${GIT_REPO_OWNER}/${GIT_REPO_NAME}${GIT_REMOTE_EXT}
 	git remote set-url --push --add ${GIT_REMOTE_NAME} ${GIT_REMOTE1}/${GIT_REPO_OWNER}/${GIT_REPO_NAME}${GIT_REMOTE_EXT}
-	git remote set-url --push --add ${GIT_REMOTE_NAME} ${GIT_REMOTE2}/${GIT_REPO_OWNER}/${GIT_REPO_NAME}${GIT_REMOTE_EXT}
+	git remote set-url --push --add ${GIT_REMOTE_NAME} ${GIT_REMOTE2}/${GIT_REPO_OWNER2}/${GIT_REPO_NAME2}${GIT_REMOTE_EXT2}
 
 	git remote -v
 }
