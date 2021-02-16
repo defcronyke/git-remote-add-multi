@@ -29,3 +29,9 @@ if you run this command again in this repository with no arguments:
 git@gitlab.com:defcronyke/git-remote-add-multi.git
 git@github.com:defcronyke/git-remote-add-multi.git
 ```
+
+## Get help:
+
+```shell
+bash <(curl -sL https://tinyurl.com/git-remote-add-multi) -h
+```
