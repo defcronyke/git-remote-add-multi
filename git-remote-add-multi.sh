@@ -65,8 +65,8 @@ git_remote_add_multi() {
 	set -e
 
 	GIT_REMOTE2=${GIT_REMOTE2:-$(echo "$GIT_REMOTE1" | sed -E "s/(git@|https:\/\/)(.+)([\/\:])/\1$GIT_REMOTE_SWAPPED\3/")}
-	GIT_REPO_OWNER=${GIT_REPO_OWNER:-$(whoami)}
-	GIT_REPO_NAME=${GIT_REPO_NAME:-$(basename $PWD)}
+	GIT_REPO_OWNER=${GIT_REPO_OWNER:-$(git remote get-url origin | sed -E 's/(git@|https:\/\/)(.+)([\/\:])(.+)\/(.+)/\4/')}
+	GIT_REPO_NAME=${GIT_REPO_NAME:-$(git remote get-url origin | sed -E "s/(git@|https:\/\/)(.+)([\/\:])(.+)\/(.+)($GIT_REMOTE_EXT)/\5/")}
 
 	if [ $# -gt 2 ] || [ $# -ge 1 ] && [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
 		git_remote_add_multi_usage
