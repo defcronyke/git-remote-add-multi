@@ -13,7 +13,7 @@ url as the first command line argument if you want.
 ## Usage:
 
 ```shell
-bash <(curl -sL https://tinyurl.com/git-remote-add-multi) [$GIT_REMOTE2]
+bash <(curl -sL https://tinyurl.com/git-remote-add-multi) [secondary-git-url]
 ```
 
 #### Optional: Set these environment variables to customize the behaviour (defaults are as below):
