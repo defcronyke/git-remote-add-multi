@@ -55,7 +55,7 @@ git_remote_add_multi() {
 	set -e
 
 	GIT_REMOTE_NAME=${GIT_REMOTE_NAME:-all}
-	GIT_REMOTE_EXT=${GIT_REMOTE_EXT:-.git}
+	GIT_REMOTE_EXT=${GIT_REMOTE_EXT:-$(git remote get-url origin | sed -E "s/(git@|https:\/\/)(.+)([\/\:])(.+)\/(.+)(\..+)/\6/")}
 	GIT_REMOTE1=${GIT_REMOTE1:-$(git remote get-url origin | sed 's@\(^.\+[/:]\).\+/.\+@\1@')}
 	GIT_REMOTE_HOST1=${GIT_REMOTE_HOST1:-$(echo "$GIT_REMOTE1" | sed -E 's/(git@|https:\/\/)(.+)([\/\:])/\2/')}
 	GIT_REMOTE_HOST2=${GIT_REMOTE_HOST2:-github.com}
@@ -66,7 +66,7 @@ git_remote_add_multi() {
 
 	GIT_REMOTE2=${GIT_REMOTE2:-$(echo "$GIT_REMOTE1" | sed -E "s/(git@|https:\/\/)(.+)([\/\:])/\1$GIT_REMOTE_SWAPPED\3/")}
 	GIT_REPO_OWNER=${GIT_REPO_OWNER:-$(git remote get-url origin | sed -E 's/(git@|https:\/\/)(.+)([\/\:])(.+)\/(.+)/\4/')}
-	GIT_REPO_NAME=${GIT_REPO_NAME:-$(git remote get-url origin | sed -E "s/(git@|https:\/\/)(.+)([\/\:])(.+)\/(.+)($GIT_REMOTE_EXT)/\5/")}
+	GIT_REPO_NAME=${GIT_REPO_NAME:-$(git remote get-url origin | sed -E "s/(git@|https:\/\/)(.+)([\/\:])(.+)\/(.+)(\..+)/\5/")}
 
 	if [ $# -gt 2 ] || [ $# -ge 1 ] && [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
 		git_remote_add_multi_usage
