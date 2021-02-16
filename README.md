@@ -13,16 +13,16 @@ url as the first command line argument if you want.
 ## Usage:
 
 ```shell
-bash <(curl -sL https://tinyurl.com/git-remote-add-multi) [secondary-git-url]
+bash <(curl -sL https://tinyurl.com/git-remote-add-multi)
 ```
 
-#### Optional: Set these environment variables to customize the behaviour (defaults are as below):
+#### Optional: Set these environment variables to customize the behaviour, and pass an optional arg for secondary-git-url (defaults are as below):
 
 ```shell
-GIT_REMOTE_NAME="all"
+GIT_REMOTE_NAME="all" bash <(curl -sL https://tinyurl.com/git-remote-add-multi) git@github.com:defcronyke/git-remote-add-multi.git
 ```
 
-With the current settings, these urls will be added to a new remote called "all"
+With the current settings (assuming origin remote is GitLab), these urls will be added to a new remote called "all"
 if you run this command again in this repository with no arguments:
 
 ```shell
