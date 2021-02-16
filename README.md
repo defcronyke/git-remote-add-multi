@@ -4,7 +4,6 @@
 $ bash <(curl -sL https://tinyurl.com/git-remote-add-multi) -h
 ```
 
-```
 Git Remote Add Multi
 
 by Jeremy Carter <jeremy@jeremycarter.ca>
@@ -31,4 +30,3 @@ if you run this command again with no arguments:
 
 git@gitlab.com:defcronyke/git-remote-add-multi.git
 git@github.com:defcronyke/git-remote-add-multi.git
-```
