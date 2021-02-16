@@ -23,7 +23,7 @@ git_remote_add_multi_usage() {
 	echo ""
 	echo "${GIT_REMOTE1}${GIT_REPO_OWNER}/${GIT_REPO_NAME}${GIT_REMOTE_EXT}"
 	echo "${GIT_REMOTE2}${GIT_REPO_OWNER}/${GIT_REPO_NAME}${GIT_REMOTE_EXT}"
-        echo ""
+	echo ""
 	
 	return 1
 }
