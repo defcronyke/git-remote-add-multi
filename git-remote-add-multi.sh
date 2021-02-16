@@ -4,7 +4,7 @@ git_remote_add_multi_usage() {
 	echo ""
         echo "Add a new git remote called \"all\" pointing at both gitlab (primary) and github (secondary)."
         echo ""
-        echo "usage: $(basename $0) [\$GIT_REPO_NAME] [\$GIT_REPO_OWNER]"
+        echo "usage: bash <(curl -sL https://tinyurl.com/git-remote-add-multi) [\$GIT_REPO_NAME] [\$GIT_REPO_OWNER]"
         echo ""
         echo "Optional: Set these environment variables to customize the behaviour (defaults are as below):"
         echo ""

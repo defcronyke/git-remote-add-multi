@@ -1,11 +1,11 @@
 # Git Remote Add Multi
 
 ```shell
-$ ./git-remote-add-multi.sh -h
+$ bash <(curl -sL https://tinyurl.com/git-remote-add-multi) -h
 
 Add a new git remote called "all" pointing at both gitlab (primary) and github (secondary).
 
-usage: git-remote-add-multi.sh [$GIT_REPO_NAME] [$GIT_REPO_OWNER]
+usage: bash <(curl -sL https://tinyurl.com/git-remote-add-multi) [$GIT_REPO_NAME] [$GIT_REPO_OWNER]
 
 Optional: Set these environment variables to customize the behaviour (defaults are as below):
 
