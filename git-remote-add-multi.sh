@@ -4,7 +4,7 @@ git_remote_add_multi_usage() {
 	echo ""
 	echo "Git Remote Add Multi"
 	echo ""
-	echo "by Jeremy Carter <jeremy@jeremycarter.ca>"
+	echo "By Jeremy Carter <jeremy@jeremycarter.ca>"
 	echo ""
 	echo "Add a new git remote called \"all\" pointing at both the current origin remote, and a secondary remote to use as"
 	echo "a mirror. By default, if your origin remote isn't GitHub, then GitHub is used as the secondary remote, and it is"

@@ -1,6 +1,6 @@
 # Git Remote Add Multi
 
-##### by Jeremy Carter _<_[jeremy@jeremycarter.ca](mailto:Jeremy%20Carter%20<jeremy@jeremycarter.ca>)_>_
+##### By Jeremy Carter _<_[jeremy@jeremycarter.ca](mailto:Jeremy%20Carter%20<jeremy@jeremycarter.ca>)_>_
 
 ## Git Remote Add Multi
 
@@ -20,11 +20,6 @@ bash <(curl -sL https://tinyurl.com/git-remote-add-multi) [secondary-git-url]
 
 ```shell
 GIT_REMOTE_NAME="all"
-GIT_REMOTE_EXT=".git"
-GIT_REMOTE1="git@gitlab.com:"
-GIT_REMOTE2="git@github.com:"
-GIT_REPO_OWNER="defcronyke"
-GIT_REPO_NAME="git-remote-add-multi"
 ```
 
 With the current settings, these urls will be added to a new remote called "all"
