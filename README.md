@@ -22,8 +22,8 @@ bash <(curl -sL https://tinyurl.com/git-remote-add-multi)
 GIT_REMOTE_NAME="all" bash <(curl -sL https://tinyurl.com/git-remote-add-multi) git@github.com:defcronyke/git-remote-add-multi.git
 ```
 
-With the current settings (assuming origin remote is GitLab), these urls will be added to a new remote called "all"
-if you run this command again in this repository with no arguments:
+With the current settings (assuming the origin remote is GitLab), these urls will be added to a new remote called "all"
+if you run the above command in this repository with no arguments:
 
 ```shell
 git@gitlab.com:defcronyke/git-remote-add-multi.git
