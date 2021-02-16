@@ -23,7 +23,7 @@ GIT_REMOTE_NAME="all"
 ```
 
 With the current settings, these urls will be added to a new remote called "all"
-if you run this command again with no arguments:
+if you run this command again in this repository with no arguments:
 
 ```shell
 git@gitlab.com:defcronyke/git-remote-add-multi.git
