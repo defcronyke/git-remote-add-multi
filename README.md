@@ -1,6 +1,6 @@
 # Git Remote Add Multi
 
-##### by Jeremy Carter _<_jeremy@jeremycarter.ca_>\_
+##### by Jeremy Carter _<_[jeremy@jeremycarter.ca](mailto:Jeremy Carter <jeremy@jeremycarter.ca>)_>_
 
 ## Git Remote Add Multi
 
