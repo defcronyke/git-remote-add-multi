@@ -95,4 +95,3 @@ git_remote_add_multi() {
 }
 
 git_remote_add_multi $@
-
